@@ -53,4 +53,11 @@ public class StoreServiceImpl implements StoreService {
         Specification<Store> storeSpecification = StoreSpecification.getSpecification(storeSearchDTO);
         return storeRepository.findAll(storeSpecification, pageable);
     }
+
+    @Override
+    public void deleteStore(String id) {
+        Store store = getStoreById(id);
+        store.setStatus(false);
+        storeRepository.save(store);
+    }
 }

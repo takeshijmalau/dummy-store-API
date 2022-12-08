@@ -5,12 +5,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name ="mst_store")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,4 +21,5 @@ public class Store {
     @Column(nullable = false)
     private String address;
     private String license;
+    private Boolean status;
 }

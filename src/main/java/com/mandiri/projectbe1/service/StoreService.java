@@ -13,4 +13,5 @@ public interface StoreService {
     List<Store> getAllStore();
     Store getStoreById(String storeId);
     Page<Store>getStorePerPage(Pageable pageable, StoreSearchDTO storeSearchDTO);
+    void deleteStore(String id);
 }
