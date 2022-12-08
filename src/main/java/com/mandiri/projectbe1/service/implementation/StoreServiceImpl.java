@@ -1,11 +1,16 @@
 package com.mandiri.projectbe1.service.implementation;
 
 import com.mandiri.projectbe1.constant.ResponseMessage;
+import com.mandiri.projectbe1.dto.StoreSearchDTO;
 import com.mandiri.projectbe1.entity.Store;
 import com.mandiri.projectbe1.repository.StoreRepository;
 import com.mandiri.projectbe1.service.StoreService;
+import com.mandiri.projectbe1.specification.StoreSpecification;
 import com.mandiri.projectbe1.utils.exception.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,5 +46,11 @@ public class StoreServiceImpl implements StoreService {
     }else {
         throw new DataNotFoundException(String.format(ResponseMessage.NOT_FOUND_MESSAGE));
     }
+    }
+
+    @Override
+    public Page<Store> getStorePerPage(Pageable pageable, StoreSearchDTO storeSearchDTO) {
+        Specification<Store> storeSpecification = StoreSpecification.getSpecification(storeSearchDTO);
+        return storeRepository.findAll(storeSpecification, pageable);
     }
 }
